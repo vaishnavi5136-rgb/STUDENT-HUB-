@@ -6,6 +6,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+  .dashboard{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+padding:15px;
+}
+
+.dash-card{
+background:white;
+border-radius:12px;
+padding:20px;
+text-align:center;
+font-size:22px;
+box-shadow:0 4px 10px rgba(0,0,0,0.15);
+transition:0.3s;
+}
+
+.dash-card:hover{
+transform:scale(1.05);
+}
+
+.dash-card p{
+font-size:14px;
+margin-top:5px;
+}
 .bottom-nav{
   position:fixed;
   bottom:0;
@@ -45,6 +70,13 @@ header{
 }
 
 .card{
+  .card{
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
   background:white;
   border-radius:12px;
   padding:20px;
@@ -129,6 +161,34 @@ color:gray;
 
 <header>
 StudentHub
+  <div class="dashboard">
+
+<div class="dash-card">
+📊
+<p>Calculator</p>
+</div>
+
+<div class="dash-card">
+⏱️
+<p>Pomodoro</p>
+</div>
+
+<div class="dash-card">
+📅
+<p>Countdown</p>
+</div>
+
+<div class="dash-card">
+📝
+<p>Notes</p>
+</div>
+
+<div class="dash-card">
+🎓
+<p>GPA</p>
+</div>
+
+  </div>
 </header>
 
 <div class="container">
