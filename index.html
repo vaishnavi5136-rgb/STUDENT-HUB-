@@ -92,7 +92,36 @@ StudentHub
 <button onclick="startTimer()">Start</button>
 <h2 id="timer">25:00</h2>
 </div>
+<div class="card">
+<h3>Exam Countdown</h3>
 
+<label>Enter exam date:</label>
+<input type="date" id="examDate"><br>
+<button onclick="startCountdown()">Start Countdown</button>
+
+<h2 id="countdown"></h2>
+</div>
+<div class="card">
+<h3>Notes Saver</h3>
+
+<textarea id="notes" rows="5" placeholder="Write your notes here..."></textarea><br>
+<button onclick="saveNotes()">Save</button>
+<button onclick="loadNotes()">Load</button>
+<h4 id="notesMsg"></h4>
+</div>
+<div class="card">
+<h3>GPA / Marks Tracker</h3>
+
+<label>Number of Subjects:</label>
+<input type="number" id="numSubjects" value="5" min="1"><br>
+<button onclick="createSubjects()">Set Subjects</button>
+
+<div id="subjectsContainer"></div>
+
+<button onclick="calculateGPA()">Calculate GPA</button>
+
+<h2 id="gpaResult"></h2>
+</div>
 </div>
 
 <footer>
@@ -130,6 +159,97 @@ function startTimer(){
     if(time < 0) clearInterval(timerInterval);
   }, 1000);
 }
+</script>
+<script>
+let countdownInterval;
+
+function startCountdown(){
+  clearInterval(countdownInterval);
+  let exam = new Date(document.getElementById("examDate").value).getTime();
+
+  countdownInterval = setInterval(()=>{
+    let now = new Date().getTime();
+    let distance = exam - now;
+
+    if(distance < 0){
+      clearInterval(countdownInterval);
+      document.getElementById("countdown").innerText = "Exam Time! 🏆";
+      return;
+    }
+
+    let days = Math.floor(distance / (1000*60*60*24));
+    let hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+    let minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+    let seconds = Math.floor((distance % (1000*60)) / 1000);
+
+    document.getElementById("countdown").innerText =
+      days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+  }, 1000);
+}
+</script>
+<script>
+function saveNotes(){
+  let content = document.getElementById("notes").value;
+  localStorage.setItem("studentNotes", content);
+  document.getElementById("notesMsg").innerText = "Notes saved ✅";
+}
+
+function loadNotes(){
+  let content = localStorage.getItem("studentNotes") || "";
+  document.getElementById("notes").value = content;
+  document.getElementById("notesMsg").innerText = "Notes loaded 📖";
+}
+</script>
+<script>
+
+function createSubjects() {
+
+  let n = Number(document.getElementById("numSubjects").value);
+  let container = document.getElementById("subjectsContainer");
+
+  container.innerHTML = "";
+
+  for (let i = 1; i <= n; i++) {
+
+    container.innerHTML +=
+      '<div>' +
+      '<label>Subject ' + i + ' Marks:</label><br>' +
+      '<input type="number" class="marks" placeholder="Obtained"><br>' +
+      '<label>Max Marks:</label><br>' +
+      '<input type="number" class="maxMarks" placeholder="Total"><br><br>' +
+      '</div>';
+
+  }
+}
+
+function calculateGPA() {
+
+  let marks = document.getElementsByClassName("marks");
+  let maxMarks = document.getElementsByClassName("maxMarks");
+
+  let total = 0;
+  let totalMax = 0;
+
+  for (let i = 0; i < marks.length; i++) {
+
+    total += Number(marks[i].value);
+    totalMax += Number(maxMarks[i].value);
+
+  }
+
+  if(totalMax === 0){
+    document.getElementById("gpaResult").innerText = "Please enter marks.";
+    return;
+  }
+
+  let percentage = (total / totalMax) * 100;
+  let gpa = (percentage / 20).toFixed(2);
+
+  document.getElementById("gpaResult").innerText =
+  "Percentage: " + percentage.toFixed(2) + "% | GPA: " + gpa + "/5";
+
+}
+
 </script>
 </body>
   </html>
