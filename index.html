@@ -6,6 +6,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  display:flex;
+  justify-content:space-around;
+  background:#ffffff;
+  box-shadow:0 -2px 10px rgba(0,0,0,0.2);
+  padding:10px 0;
+}
+
+.bottom-nav button{
+  background:none;
+  border:none;
+  font-size:16px;
+  font-weight:bold;
+  color:#2193b0;
+}
+body{
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#6dd5ed,#2193b0);
+  margin:0;
+  padding:0;
+}
+
+header{
+  text-align:center;
+  padding:20px;
+  font-size:28px;
+  font-weight:bold;
+  color:white;
+}
+
+.container{
+  padding:15px;
+}
+
+.card{
+  background:white;
+  border-radius:12px;
+  padding:20px;
+  margin:15px 0;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:6px;
+  background:#2193b0;
+  color:white;
+  font-weight:bold;
+}
+
+input, textarea{
+  width:100%;
+  padding:8px;
+  margin:6px 0;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
 body{
 font-family: Arial;
 background:#f4f6fb;
@@ -121,6 +183,14 @@ StudentHub
 <button onclick="calculateGPA()">Calculate GPA</button>
 
 <h2 id="gpaResult"></h2>
+</div>
+<div class="card">
+<h3>Study To-Do List</h3>
+
+<input type="text" id="taskInput" placeholder="Enter task">
+<button onclick="addTask()">Add Task</button>
+
+<ul id="taskList"></ul>
 </div>
 </div>
 
@@ -257,6 +327,49 @@ if ("serviceWorker" in navigator) {
  .then(function(){
    console.log("Service Worker Registered");
  });
+}
+</script>
+<script>
+  function addTask(){
+  let input=document.getElementById("taskInput");
+  let list=document.getElementById("taskList");
+
+  let li=document.createElement("li");
+  li.innerText=input.value;
+
+  li.onclick=function(){
+    li.style.textDecoration="line-through";
+  }
+
+  list.appendChild(li);
+  input.value="";
+}
+</script>
+function scrollToTop(){
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+<div class="bottom-nav">
+  <button onclick="scrollToTop()">Home</button>
+  <button onclick="showTools()">Tools</button>
+  <button onclick="showNotes()">Notes</button>
+</div>
+<script>
+  function scrollToTop(){
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+function showTools(){
+  alert("Scroll to use the tools like calculator and timer.");
+}
+
+function showNotes(){
+  document.getElementById("notes").focus();
 }
 </script>
 </body>
