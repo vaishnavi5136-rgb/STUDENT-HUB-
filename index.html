@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>StudentHub - Percentage Calculator</title>
+<style>
+body{
+font-family: Arial;
+background:#f4f6ff;
+text-align:center;
+padding:40px;
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:10px;
+width:300px;
+margin:auto;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input{
+width:80%;
+padding:10px;
+margin:5px;
+}
+
+button{
+padding:10px 20px;
+background:#4CAF50;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#45a049;
+}
+</style>
+</head>
+
+<body>
+
+<h1>StudentHub by Vaishnavi</h1>
+<h3>Percentage Calculator</h3>
+
+<div class="container">
+
+<input type="number" id="s1" placeholder="Subject 1 marks"><br>
+<input type="number" id="s2" placeholder="Subject 2 marks"><br>
+<input type="number" id="s3" placeholder="Subject 3 marks"><br>
+<input type="number" id="s4" placeholder="Subject 4 marks"><br>
+<input type="number" id="s5" placeholder="Subject 5 marks"><br><br>
+
+<button onclick="calculate()">Calculate</button>
+
+<h3 id="result"></h3>
+
+</div>
+
+<script>
+
+function calculate(){
+
+let s1=Number(document.getElementById("s1").value);
+let s2=Number(document.getElementById("s2").value);
+let s3=Number(document.getElementById("s3").value);
+let s4=Number(document.getElementById("s4").value);
+let s5=Number(document.getElementById("s5").value);
+
+let total=s1+s2+s3+s4+s5;
+let percent=total/5;
+
+document.getElementById("result").innerHTML="Your Percentage: "+percent+"%";
+
+}
+
+</script>
+<p style="margin-top:30px;">Made by Vaishnavi</p>
+</body>
+</html>
